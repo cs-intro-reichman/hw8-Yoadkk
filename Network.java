@@ -84,15 +84,12 @@ public class Network {
         String maxMutUser ="";
         for (int i = 0; i < this.userCount-1; i++) {
             if (this.getUser(name) != this.users[i]){
-                if(maxMut < this.getUser(name).countMutual(users[i])){
+                if(maxMut <= this.getUser(name).countMutual(users[i])){
                     maxMut = this.getUser(name).countMutual(users[i]);
                     maxMutUser = this.users[i].getName();
                 }
-                
-                
             }
         }
-
         
         return maxMutUser;
     }
@@ -103,7 +100,7 @@ public class Network {
         int maxF = 0;
         String popUser = "";
         for (int i = 0; i < this.getUserCount()-1; i++) {
-            if (maxF < this.users[i].getfCount()){
+            if (maxF <= this.users[i].getfCount()){
                 popUser = this.users[i].getName();
 
             }
