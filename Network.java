@@ -85,7 +85,7 @@ public class Network {
     public String recommendWhoToFollow(String name) {
         int maxMut = 0;
         String maxMutUser ="";
-        for (int i = 0; i < this.userCount-1; i++) {
+        for (int i = 0; i < this.userCount; i++) {
             if (this.getUser(name) != this.users[i]){
                 if(maxMut <= this.getUser(name).countMutual(users[i])){
                     maxMut = this.getUser(name).countMutual(users[i]);
@@ -120,7 +120,7 @@ public class Network {
      *  the users in this network. Note: A name can appear 0 or 1 times in each list. */
     private int followeeCount(String name) {
         int countF = 0;
-        for (int i = 0; i < this.getUserCount()-1; i++) {
+        for (int i = 0; i < this.getUserCount(); i++) {
             if(this.users[i].follows(name)){
                 countF++;
             }
