@@ -105,14 +105,13 @@ public class Network {
             return null;
         }
         String popUser = "";
-        for (int i = 0; i < this.getUserCount()-1; i++) {
-            if (maxF <= this.users[i].getfCount()){
+        for (int i = 0; i < this.getUserCount(); i++) {
+            if (maxF < this.users[i].getfCount()){
                 popUser = this.users[i].getName();
 
             }
             
         }
-        //// Replace the following statement with your code
         return popUser;
     }
 
