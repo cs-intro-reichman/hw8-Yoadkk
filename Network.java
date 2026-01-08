@@ -66,8 +66,8 @@ public class Network {
      *  or if the "follows" addition failed for some reason, returns false. */
     public boolean addFollowee(String name1, String name2) {
 
-        if((this.getUser(name2) != null) || (this.getUser(name1) != null) || (!name1.equals(name2))){
-            if (this.getUser(name1).follows(name2) &&((this.getUser(name2) != null) || (this.getUser(name1) != null) || (!name1.equals(name2)))) {
+        if((this.getUser(name2) != null) && (this.getUser(name1) != null) && (!name1.equals(name2))){
+            if (this.getUser(name1).follows(name2)) {
                 return false;
             }
             else {
@@ -75,7 +75,7 @@ public class Network {
                 return true;
             }
         }
-        else{
+        else {
             return false;
         } 
     }
