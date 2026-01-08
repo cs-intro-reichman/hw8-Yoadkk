@@ -67,7 +67,7 @@ public class Network {
     public boolean addFollowee(String name1, String name2) {
 
         if((this.getUser(name2) != null) || (this.getUser(name1) != null) || (!name1.equals(name2))){
-            if (this.getUser(name1).follows(name2)) {
+            if (this.getUser(name1).follows(name2) &&((this.getUser(name2) != null) || (this.getUser(name1) != null) || (!name1.equals(name2)))) {
                 return false;
             }
             else {
@@ -75,7 +75,9 @@ public class Network {
                 return true;
             }
         }
-        else return false;
+        else{
+            return false;
+        } 
     }
     
     /** For the user with the given name, recommends another user to follow. The recommended user is
