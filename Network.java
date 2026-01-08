@@ -44,17 +44,20 @@ public class Network {
     *  If the given name is already a user in this network, does nothing and returns false;
     *  Otherwise, creates a new user with the given name, adds the user to this network, and returns true. */
     public boolean addUser(String name) {
-    
-        if (getUser(name) == null) {
-            User thiUser = new User(name);
-            this.users[this.getUserCount()] = thiUser;
-            userCount++;
-            return true;
+        if(this.getUserCount() < users.length){
+            if (getUser(name) == null) {
+                User thiUser = new User(name);
+                this.users[this.getUserCount()] = thiUser;
+                userCount++;
+                return true;
+            }
+            else {
+                return false;
+            }
         }
-        else {
+        else{
             return false;
         }
-    
         
     }
 
@@ -62,13 +65,16 @@ public class Network {
      *  If any of the two names is not a user in this network,
      *  or if the "follows" addition failed for some reason, returns false. */
     public boolean addFollowee(String name1, String name2) {
-        if (this.getUser(name1).follows(name2)) {
-            return false;
+        if(this.getUser(name2) != null){
+            if (this.getUser(name1).follows(name2)) {
+                return false;
+            }
+            else {
+                this.getUser(name1).addFollowee(name2);
+                return true;
+            }
         }
-        else {
-            this.getUser(name1).addFollowee(name2);
-            return true;
-        }
+        else return false;
     }
     
     /** For the user with the given name, recommends another user to follow. The recommended user is
