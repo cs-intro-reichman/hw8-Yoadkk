@@ -86,11 +86,18 @@ public class Network {
         int maxMut = 0;
         String maxMutUser ="";
         for (int i = 0; i < this.userCount; i++) {
-            if (this.getUser(name) != this.users[i]){
-                if(maxMut <= this.getUser(name).countMutual(users[i])){
+            if (this.getUser(name) != this.users[i] && !this.getUser(name).follows(users[i].getName())){
+                if(maxMut < this.getUser(name).countMutual(users[i])){
                     maxMut = this.getUser(name).countMutual(users[i]);
                     maxMutUser = this.users[i].getName();
                 }
+            }
+            else if (maxMutUser.equals("") && !this.getUser(name).getName().equals(users[0].getName())){
+                maxMutUser = users[0].getName();
+            }
+            else if (maxMutUser.equals("") && this.getUser(name).getName().equals(users[0].getName())){
+             maxMutUser = this.mostPopularUser();
+            
             }
         }
         
@@ -106,10 +113,11 @@ public class Network {
         }
         String popUser = "";
         for (int i = 0; i < this.getUserCount(); i++) {
-            if (maxF < this.users[i].getfCount()){
+            if (maxF < this.followeeCount(this.users[i].getName())){
+                maxF = this.followeeCount(this.users[i].getName());
                 popUser = this.users[i].getName();
-
             }
+
             
         }
         return popUser;
@@ -120,8 +128,10 @@ public class Network {
     private int followeeCount(String name) {
         int countF = 0;
         for (int i = 0; i < this.getUserCount(); i++) {
-            if(this.users[i].follows(name)){
-                countF++;
+            if (this.users[i] != this.getUser(name)){
+                if(this.users[i].follows(name)){
+                    countF++;
+                }
             }
         }
         return countF;
